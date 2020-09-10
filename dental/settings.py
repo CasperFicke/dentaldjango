@@ -1,6 +1,12 @@
 from dotenv import load_dotenv
 
 import os
+
+# Setting to deploy to heroku
+import django_heroku
+import dj_database_url
+from decouple import config
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'dental.urls'
@@ -119,6 +126,9 @@ STATICFILES_DIRS = [
   BASE_DIR / 'static',
 ]
 
+# Setting for deploying to heroku
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # email settings using gmail as mailserver
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -137,3 +147,5 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
 '''
+
+django_heroku.settings(locals())
