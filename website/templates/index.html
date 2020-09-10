@@ -84,7 +84,7 @@
                   <li><a href="#">Pages</a>
                     <ul class="dropdown">
                       <li><a href="{% url 'index' %}">- Home</a></li>
-                      <li><a href="about.html">- About Us</a></li>
+                      <li><a href="{% url 'about' %}">- About Us</a></li>
                       <li><a href="service.html">- Service</a></li>
                       <li><a href="pricing.html">- Pricing</a></li>
                       <li><a href="blog.html">- Blog</a></li>
@@ -107,7 +107,7 @@
                       </li>
                     </ul>
                   </li>
-                  <li><a href="about.html">About</a></li>
+                  <li><a href="{% url 'about' %}">About</a></li>
                   <li><a href="service.html">Service</a></li>
                   <li><a href="pricing.html">Pricing</a></li>
                   <li><a href="#">Blog</a>
@@ -746,7 +746,7 @@
         <!-- Single Footer Widget -->
         <div class="col-12 col-sm-6 col-lg-4">
           <div class="single-footer-widget">
-            <a href="./index.html" class="d-block mb-4"><img src="{% static 'website/img/core-img/logo.png' %}" alt=""></a>
+            <a href="{% url 'index' %}" class="d-block mb-4"><img src="{% static 'website/img/core-img/logo.png' %}" alt=""></a>
             <p>Etiam sutor risus, dapibus act elefend katen, lacinia sitamet denim. Mauris sagittis kansa interdum dignissim.</p>
             <div class="footer-contact">
               <p><i class="icon_pin"></i> Purmersteenweg 42, Purmerend, NL</p>
@@ -782,7 +782,7 @@
             <!-- Quick Links Nav -->
             <nav>
               <ul class="quick-links">
-                <li><a href="#">About</a></li>
+                <li><a href="{% url 'about' %}#">About</a></li>
                 <li><a href="#">FAQs</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Policy</a></li>
