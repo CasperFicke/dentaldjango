@@ -33,3 +33,19 @@ def contact(request):
 # about view
 def about(request):
   return render(request, 'about.html', {})
+
+# blog view
+def blog(request):
+  return render(request, 'blog.html', {})
+
+# blog-details view
+def blog_details(request):
+  return render(request, 'blog-details.html', {})
+
+# pricing view
+def pricing(request):
+  return render(request, 'pricing.html', {})
+
+# service view
+def service(request):
+  return render(request, 'service.html', {})
