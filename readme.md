@@ -89,9 +89,7 @@ denta_project/
     ├── manage.py
     ├── Procfile
     ├── readme.md
-
-
-            │   ├── default-assets/
+    │   ├── default-assets/
     │   ├── fonts/
     │   ├── animate.css
     │   ├── bootstrap.min.css
@@ -100,7 +98,5 @@ denta_project/
     │   ├── magnific-popup.css
     │   ├── owl.carousel.min.css
     │   ├── style.css
-    ├─
-   
     ├── style.css
     ├── style.css.map
