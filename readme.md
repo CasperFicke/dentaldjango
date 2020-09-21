@@ -1,3 +1,4 @@
+# Dental website
 ------------------------------------------------------
 Template Name: Dento - Dentist & Medical HTML Template
 Template Author: Colorlib
@@ -6,7 +7,9 @@ Version: 1.0.0 Last Update: Dec 05, 2018
 Edited by Casper Ficke Last edit: Sept 14,2020
 -----------------------------------------------------
 
-File Structure:
+## File Structure:
+
+```bash
 denta_project/
 └── dental/
     ├── __pycache__/
@@ -100,3 +103,5 @@ denta_project/
     │   ├── style.css
     ├── style.css
     ├── style.css.map
+```
+
