@@ -135,7 +135,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'cfidevelopt'
 EMAIL_HOST_PASSWORD = os.getenv('GMAILPW')
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_USE_SSL = True
 
 '''
 # email settings using localhost as mailserver
