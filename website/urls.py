@@ -15,4 +15,8 @@ urlpatterns = [
   path('blog-details/', views.blog_details, name="blog-details"),
   path('pricing/', views.pricing, name="pricing"),
   path('service/', views.service, name="service"),
+    path('stockhome/', views.stockhome, name="stockhome"),
+  path('agenda/', views.agenda, name="agenda"),
+  # path converters
+  path('<int:year>/<str:month>/', views.kalender , name="kalender"),
 ]

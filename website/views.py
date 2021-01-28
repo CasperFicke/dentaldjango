@@ -1,10 +1,19 @@
+# django
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages
 from django.core.mail import send_mail
 
+# local
 from .forms import SignUpForm, EditProfileForm
+
+# python packages
+import os
+
+import calendar
+from calendar import HTMLCalendar, monthrange
+from datetime import datetime
 
 # Index view
 def index(request):
@@ -127,3 +136,64 @@ def service(request):
 # book appointment view
 def book_appointment(request):
   return render(request, 'book_appointment.html', {})
+
+# agenda view (vast url met huidige maand)
+def agenda(request):
+ 
+  # get current date
+  now = datetime.now()
+  current_year = now.year
+  current_month = now.month
+  current_time = now.strftime('%H:%M:%S')
+  # Create calendar
+  cal = HTMLCalendar().formatmonth(
+    current_year,
+    current_month
+  )
+  return render(request,
+    'agenda.html', {
+    "cal": cal,
+    "current_time": current_time
+    })
+
+# kalender view (dynamische url met jaar/maand)
+def kalender(request, year, month):
+  # set firstletter of month to uppercase
+  month = month.capitalize()
+  # convert month from name to number
+  month_number = list(calendar.month_name).index(month)
+  # make sure it's an integer
+  month_number = int(month_number)
+
+  # Create calendar
+  cal = HTMLCalendar().formatmonth(
+    year,
+    month_number
+  )
+  # get current date
+  now = datetime.now()
+  current_year = now.year
+  current_time = now.strftime('%H:%M:%S')
+
+  return render(request,
+    'calendar.html', {
+    "year":year,
+    "month": month,
+    "month_number": month_number,
+    "cal": cal,
+    "current_time": current_time
+    })
+
+# Stockhome view
+def stockhome(request):
+  import requests
+  import json
+  iexcloud_apikey = os.getenv('IEXCLOUD_APIKEY')
+  
+  api_request = requests.get("https://cloud.iexapis.com/stable/stock/aapl/quote?token=" + iexcloud_apikey)
+  try:
+    api_result = json.loads(api_request.content)
+  except Exception as e:
+    api_result = "Error..."
+  
+  return render(request, 'stockhome.html', {'api_result': api_result})
