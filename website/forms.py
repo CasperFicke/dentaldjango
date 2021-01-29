@@ -1,6 +1,10 @@
+# django
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
+
+#local
+from .models import Stock
 
 # Sign up form
 class SignUpForm(UserCreationForm):
@@ -68,3 +72,9 @@ class EditProfileForm(UserChangeForm):
               'last_name',
               'email',
               'password')
+
+# form to add stock 
+class StockForm(forms.ModelForm):
+  class Meta:
+    model = Stock
+    fields = ('ticker_name',)

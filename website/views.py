@@ -6,7 +6,8 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 # local
-from .forms import SignUpForm, EditProfileForm
+from .forms  import SignUpForm, EditProfileForm, StockForm
+from .models import Stock
 
 # python packages
 import os
@@ -156,7 +157,7 @@ def agenda(request):
     "current_time": current_time
     })
 
-# kalender view (dynamische url met jaar/maand)
+# kalender view (dynamische url met /jaar/maand)
 def kalender(request, year, month):
   # set firstletter of month to uppercase
   month = month.capitalize()
@@ -189,11 +190,45 @@ def stockhome(request):
   import requests
   import json
   iexcloud_apikey = os.getenv('IEXCLOUD_APIKEY')
-  
-  api_request = requests.get("https://cloud.iexapis.com/stable/stock/aapl/quote?token=" + iexcloud_apikey)
-  try:
-    api_result = json.loads(api_request.content)
-  except Exception as e:
-    api_result = "Error..."
-  
-  return render(request, 'stockhome.html', {'api_result': api_result})
+
+  tickers = Stock.objects.all()
+  output = []
+  for ticker_item in tickers:
+      api_request = requests.get("https://cloud.iexapis.com/stable/stock/"+ str(ticker_item) + "/quote?token=" + iexcloud_apikey)
+      try:
+        api_result_table = json.loads(api_request.content)
+        output.append(api_result_table)
+      except Exception as e:
+        api_result = "Error..."  
+
+  if request.method == "POST":
+    ticker = request.POST['aandeel-ticker']
+    api_request = requests.get("https://cloud.iexapis.com/stable/stock/"+ ticker + "/quote?token=" + iexcloud_apikey)
+    try:
+      api_result = json.loads(api_request.content)
+    except Exception as e:
+      api_result = "Error..."
+
+    # render page after POST
+    return render(request, 'stockhome.html', {'api_result': api_result, 'output': output})
+  else:
+    # render page after GET
+    return render(request, 'stockhome.html', {'output': output})
+
+# add stock view
+def add_stock(request):
+  import json
+  import requests
+
+  if request.method == "POST":
+    ticker_name = request.POST['ticker_name']
+    add_stock_form = StockForm(request.POST or None)
+
+    if add_stock_form.is_valid():
+      add_stock_form.save()
+      messages.success(request, ("Stock has been added"))
+      return redirect('stockhome')
+    else:
+      messages.success(request, ("Error in form ..."))
+
+  return render(request, 'add_stock.html')

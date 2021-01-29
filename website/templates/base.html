@@ -92,6 +92,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'stockhome' %}">Stockhome </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_stock' %}">Add Stock </a>
+            </li>
           </ul>
           <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
@@ -139,7 +142,7 @@
   </div>         
 
   <!-- ***** Footer Area Start ***** -->
-  <footer class="footer-area bg-img bg-gradient-overlay" style="background-image: url({% static 'website/img/bg-img/3.jpg' %})">
+  <footer class="footer-area bg-img bg-gradient-overlay">
     <div class="container">
       <div class="row">
         <!-- Single Footer Widget -->
