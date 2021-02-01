@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 
 # local
 from .forms  import SignUpForm, EditProfileForm, StockForm
-from .models import Stock
+from .models import Stock, Course
 
 # python packages
 import os
@@ -15,6 +15,10 @@ import os
 import calendar
 from calendar import HTMLCalendar, monthrange
 from datetime import datetime
+
+# tbv rest API's
+from rest_framework import viewsets
+from .serializers import CourseSerializer, StockSerializer
 
 # Index view
 def index(request):
@@ -267,3 +271,13 @@ def delete_stock(request, stock_id):
   item.delete()
   messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " has been deleted!"))
   return redirect(add_stock)
+
+# Course view
+class CourseView(viewsets.ModelViewSet):
+  queryset         = Course.objects.all()
+  serializer_class = CourseSerializer
+
+# Stock view
+class StockView(viewsets.ModelViewSet):
+  queryset         = Stock.objects.all()
+  serializer_class = StockSerializer
