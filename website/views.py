@@ -202,12 +202,22 @@ def stockhome(request):
         api_result = "Error..."  
 
   if request.method == "POST":
-    ticker = request.POST['aandeel-ticker']
-    api_request = requests.get("https://cloud.iexapis.com/stable/stock/"+ ticker + "/quote?token=" + iexcloud_apikey)
+    ticker_name        = request.POST['ticker_name']
+    ticker_description = request.POST['ticker_description']
+    api_request = requests.get("https://cloud.iexapis.com/stable/stock/"+ ticker_name + "/quote?token=" + iexcloud_apikey)
     try:
       api_result = json.loads(api_request.content)
     except Exception as e:
       api_result = "Error..."
+    
+    add_stock_form = StockForm(request.POST or None)
+
+    if add_stock_form.is_valid():
+      add_stock_form.save()
+      messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " is aan de tabel toegevoegd"))
+      return redirect('stockhome')
+    else:
+      messages.success(request, ("Error in form ..."))
 
     # render page after POST
     return render(request, 'stockhome.html', {'api_result': api_result, 'output': output})
@@ -220,15 +230,40 @@ def add_stock(request):
   import json
   import requests
 
-  if request.method == "POST":
-    ticker_name = request.POST['ticker_name']
-    add_stock_form = StockForm(request.POST or None)
+  tickers = Stock.objects.all()
 
+  if request.method == "POST":
+    ticker_name        = request.POST['ticker_name']
+    ticker_description = request.POST['ticker_description']
+    add_stock_form = StockForm(request.POST or None)
+    # process formulier
     if add_stock_form.is_valid():
       add_stock_form.save()
-      messages.success(request, ("Stock has been added"))
-      return redirect('stockhome')
+      messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " is aan de tabel toegevoegd"))
+      return redirect('add_stock')
     else:
-      messages.success(request, ("Error in form ..."))
+      messages.success(request, ("Error in formulier ..."))
 
-  return render(request, 'add_stock.html')
+  return render(request, 'add_stock.html', {'tickers': tickers})
+
+# edit stock view
+def edit_stock(request, stock_id):
+  if request.method == 'POST':
+    item = Stock.objects.get(pk=stock_id)
+    form = StockForm(request.POST or None, instance=item)
+    if form.is_valid():
+      form.save()
+      messages.success(request, ('Item updated'))
+      return redirect('add_stock')
+  else:
+    item = Stock.objects.get(pk=stock_id)
+    return render(request, 'edit_stock.html', {'item': item})
+
+# delete stock view
+def delete_stock(request, stock_id):
+  item = Stock.objects.get(pk=stock_id)
+  ticker_name   = item.ticker_name
+  ticker_description = item.ticker_description
+  item.delete()
+  messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " has been deleted!"))
+  return redirect(add_stock)

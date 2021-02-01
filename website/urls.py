@@ -17,6 +17,8 @@ urlpatterns = [
   path('service/', views.service, name="service"),
   path('stockhome/', views.stockhome, name="stockhome"),
   path('add_stock/', views.add_stock, name="add_stock"),
+  path('delete_stock/<stock_id>', views.delete_stock, name="delete_stock"),
+  path('edit_stock/<stock_id>', views.edit_stock, name="edit_stock"),
   path('agenda/', views.agenda, name="agenda"),
   # path converters
   path('<int:year>/<str:month>/', views.kalender , name="kalender"),

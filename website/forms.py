@@ -77,4 +77,5 @@ class EditProfileForm(UserChangeForm):
 class StockForm(forms.ModelForm):
   class Meta:
     model = Stock
-    fields = ('ticker_name',)
+    fields = ('ticker_name',
+              'ticker_description')
