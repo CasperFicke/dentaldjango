@@ -1,3 +1,5 @@
+### URLS.PY WEBSITE APP ###
+
 from django.urls import path, include
 
 from rest_framework import routers
@@ -30,9 +32,9 @@ urlpatterns = [
   path('add_stock/', views.add_stock, name="add_stock"),
   path('edit_stock/<stock_id>', views.edit_stock, name="edit_stock"),
   path('delete_stock/<stock_id>', views.delete_stock, name="delete_stock"),
-  # calendar
+  # agenda
   path('agenda/', views.agenda, name="agenda"),
-  path('<int:year>/<str:month>/', views.kalender , name="kalender"), # path converters
+  path('agenda/<int:year>/<str:month>/', views.agenda , name="agenda"), # path converters
   # restframework
   path('api/', include(router.urls))
 ]

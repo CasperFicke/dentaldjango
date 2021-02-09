@@ -2,271 +2,69 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Dento - Dentist &amp; Medical">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Dento - Dentist &amp; Medical">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Title -->
+    <title>{% block title %}Dento - Dentist &amp; Medical{% endblock %}</title>
 
-  <!-- Title -->
-  <title>{% block title %}Dento - Dentist &amp; Medical{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'website/img/core-img/favicon.ico' %}">
 
-  <!-- Favicon -->
-  <link rel="icon" href="{% static 'website/img/core-img/favicon.ico' %}">
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+  </head>
 
-  <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
-
-</head>
-
-<body>
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="preload-content">
-      <div id="dento-load"></div>
-    </div>
-  </div>
-
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area">
-    <!-- ***** Navbar Start ***** -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <!-- Logo -->
-      <a class="nav-brand" href="{% url 'index' %}"><img src="{% static 'website/img/core-img/logo.png' %}" alt=""></a>
-      <!-- buttons -->
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'index' %}">Home </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Pages 
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
-                <li><a class="dropdown-item" href="{% url 'about' %}">About us</a></li>
-                <li><a class="dropdown-item" href="{% url 'service' %}">Service</a></li>
-                <li><a class="dropdown-item" href="{% url 'pricing' %}">Pricing</a></li>
-                <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
-                <li><a class="dropdown-item" href="{% url 'blog-details' %}">Blog Details</a></li>
-                <li><a class="dropdown-item" href="{% url 'book_appointment' %}">Book Appointment</a></li>
-                <li><a class="dropdown-item" href="{% url 'agenda' %}">Agenda</a></li>
-                <li><a class="dropdown-item" href="{% url 'contact' %}">Contact</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'service' %}">Service </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'pricing' %}">Pricing </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Blog
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
-                <li><a class="dropdown-item" href="{% url 'blog-details' %}">Blog Details</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'agenda' %}">Agenda </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'book_appointment' %}">Book Appointment </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact' %}">Contact </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'stockhome' %}">Stockhome </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'add_stock' %}">Add Stock </a>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto">
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown dropstart">
-              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ user.username }}
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit profile</a></li>
-                <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
-                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-              </ul>
-            </li>              
-            {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- ***** Navbar End ***** -->
-  </header>
-  <!-- ***** Header Area End ***** -->
-
-  <div class="container">
+  <body>
+    {% include 'navbar.html' %}
     <!-- Messages -->
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          {{message}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      {% endfor %}
-    {% endif %}
-  </div>
-
-  <div class="container">
-    {% block content %}
-
-    {% endblock %}
-  </div>         
-
-  <!-- ***** Footer Area Start ***** -->
-  <footer class="footer-area bg-img bg-gradient-overlay">
     <div class="container">
-      <div class="row">
-        <!-- Single Footer Widget -->
-        <div class="col-12 col-sm-6 col-lg-4">
-          <div class="single-footer-widget">
-            <a href="{% url 'index' %}" class="d-block mb-4">
-              <img src="{% static 'website/img/core-img/logo.png' %}" alt="">
-            </a>
-            <p>Welkom op deze demo website! Deze site is nog in ontwikkeling..</p>
-            <div class="footer-contact">
-              <p><i class="icon_pin"></i> Purmersteenweg 42, Purmerend, NL</p>
-              <p><i class="icon_phone"></i> +31 (0)299 - 452 452</p>
-              <p><i class="icon_mail"></i> info@purmerend.nl</p>
-            </div>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
-        </div>
-
-        <!-- Single Footer Widget -->
-        <div class="col-12 col-sm-6 col-lg">
-          <div class="single-footer-widget">
-            <!-- Widget Title -->
-            <h5 class="widget-title">Opening Hours</h5>
-
-            <!-- Opening Hours -->
-            <ul class="opening-hours">
-              <li><span>Mon-Wed</span> <span>8.00-18.00</span></li>
-              <li><span>Thu-Fri</span> <span>8.00-17.00</span></li>
-              <li><span>Sat</span>     <span>9.00-17.00</span></li>
-              <li><span>Sun</span>     <span>10.00-17.00</span></li>
-              <li><span>Holiday</span> <span>Closed</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Single Footer Widget -->
-        <div class="col-12 col-sm-6 col-lg">
-          <div class="single-footer-widget">
-            <!-- Widget Title -->
-            <h5 class="widget-title">Quick Link</h5>
-
-            <!-- Quick Links Nav -->
-            <nav>
-              <ul class="quick-links">
-                <li><a href="{% url 'about' %}#">About</a></li>
-                <li><a href="#">FAQs</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li><a href="#">Policy</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Advisors</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Dentist</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Legals</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-
-        <!-- Single Footer Widget -->
-        <div class="col-12 col-sm-6 col-lg">
-          <div class="single-footer-widget">
-            <!-- Widget Title -->
-            <h5 class="widget-title">Newsletter</h5>
-
-            <p>We will send out weekly newest article and some great offers</p>
-            <!-- Newsletter Form -->
-            <div class="footer-newsletter-form">
-              <form action="#" method="post">
-                {% csrf_token %}
-                <input type="email" name="nl-email" value="" placeholder="Email Address">
-                <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-              </form>
-            </div>
-
-            <!-- Social Info -->
-            <div class="footer-social-info">
-              <a href="https://facebook.com" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-              <a href="https://twitter.com" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
-              <a href="https://linkedin.com" data-toggle="tooltip" data-placement="top" title="Linkedin"><i class="fa fa-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
+        {% endfor %}
+      {% endif %}
     </div>
 
-    <!-- Copywrite Area -->
     <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="copywrite-content">
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- ***** Footer Area End ***** -->
+      {% block content %}
 
-  <!-- ******* All JS ******* -->
-  <!-- jQuery js -->
-  <script src="{% static 'website/js/jquery.min.js' %}"></script>
-  <!-- Popper js -->
-  <script src="{% static 'website/js/popper.min.js' %}"></script>
-  <!-- Bootstrap js -->
-  <script src="{% static 'website/js/bootstrap.min.js' %}"></script>
-  <!-- All js -->
-  <script src="{% static 'website/js/dento.bundle.js' %}"></script>
-  <!-- Active js -->
-  <script src="{% static 'website/js/default-assets/active.js' %}"></script>
+      {% endblock %}
+    </div>         
 
-  
-  <!-- Optional JavaScript; choose one of the two! -->
+    {% include 'footer.html' %}
 
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!-- ******* All JS ******* -->
+    <!-- jQuery js -->
+    <script src="{% static 'website/js/jquery.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'website/js/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+    <!-- All js -->
+    <script src="{% static 'website/js/dento.bundle.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'website/js/default-assets/active.js' %}"></script>
 
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-  -->
-</body>
+    
+    <!-- Optional JavaScript; choose one of the two! -->
 
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+  </body>
 </html>

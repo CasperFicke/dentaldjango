@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  All blogs
+{% endblock %}
+
+{% block content %}
+  <h2>Blogposts</h2>
+
+  <ul>
+    {% for blogpost in object_list %}
+      <li>
+        <a href="{% url 'show_blogpost' blogpost.pk %}">{{ blogpost.title }}</a>
+         - {{ blogpost.author.first_name }}
+          {{ blogpost.author.last_name }}
+        <a href="{% url 'update_blogpost' blogpost.pk %}">(Edit)</a>
+        <br/>
+        {{ blogpost.body }}
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

@@ -1,3 +1,5 @@
+### VIEWS.PY WEBSITE APP ###
+
 # django
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -142,27 +144,12 @@ def service(request):
 def book_appointment(request):
   return render(request, 'book_appointment.html', {})
 
-# agenda view (vast url met huidige maand)
-def agenda(request):
- 
-  # get current date
-  now = datetime.now()
-  current_year = now.year
-  current_month = now.month
+# agenda view (/agenda/ is huidige maand, /agenda/jaar/maand/ is ingevoerde maand)
+def agenda(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
+  # get current time
+  now=datetime.now()
   current_time = now.strftime('%H:%M:%S')
-  # Create calendar
-  cal = HTMLCalendar().formatmonth(
-    current_year,
-    current_month
-  )
-  return render(request,
-    'agenda.html', {
-    "cal": cal,
-    "current_time": current_time
-    })
 
-# kalender view (dynamische url met /jaar/maand)
-def kalender(request, year, month):
   # set firstletter of month to uppercase
   month = month.capitalize()
   # convert month from name to number
@@ -170,18 +157,13 @@ def kalender(request, year, month):
   # make sure it's an integer
   month_number = int(month_number)
 
-  # Create calendar
+  # Create kalender
   cal = HTMLCalendar().formatmonth(
     year,
     month_number
   )
-  # get current date
-  now = datetime.now()
-  current_year = now.year
-  current_time = now.strftime('%H:%M:%S')
-
   return render(request,
-    'calendar.html', {
+    'events/agenda.html', {
     "year":year,
     "month": month,
     "month_number": month_number,
@@ -224,10 +206,10 @@ def stockhome(request):
       messages.success(request, ("Error in form ..."))
 
     # render page after POST
-    return render(request, 'stockhome.html', {'api_result': api_result, 'output': output})
+    return render(request, 'stocks/stockhome.html', {'api_result': api_result, 'output': output})
   else:
     # render page after GET
-    return render(request, 'stockhome.html', {'output': output})
+    return render(request, 'stocks/stockhome.html', {'output': output})
 
 # add stock view
 def add_stock(request):
@@ -248,7 +230,7 @@ def add_stock(request):
     else:
       messages.success(request, ("Error in formulier ..."))
 
-  return render(request, 'add_stock.html', {'tickers': tickers})
+  return render(request, 'stocks/add_stock.html', {'tickers': tickers})
 
 # edit stock view
 def edit_stock(request, stock_id):
@@ -261,7 +243,7 @@ def edit_stock(request, stock_id):
       return redirect('add_stock')
   else:
     item = Stock.objects.get(pk=stock_id)
-    return render(request, 'edit_stock.html', {'item': item})
+    return render(request, 'stocks/edit_stock.html', {'item': item})
 
 # delete stock view
 def delete_stock(request, stock_id):

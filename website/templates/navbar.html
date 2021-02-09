@@ -1,0 +1,108 @@
+{% load static %}
+
+<!-- ***** Navbar Start ***** -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- Logo -->
+  <a class="nav-brand" href="{% url 'index' %}"><img src="{% static 'website/img/core-img/logo.png' %}" alt=""></a>
+  <!-- buttons -->
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">Home </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pages 
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'index' %}">Home</a></li>
+            <li><a class="dropdown-item" href="{% url 'about' %}">About us</a></li>
+            <li><a class="dropdown-item" href="{% url 'service' %}">Service</a></li>
+            <li><a class="dropdown-item" href="{% url 'pricing' %}">Pricing</a></li>
+            <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
+            <li><a class="dropdown-item" href="{% url 'blog-details' %}">Blog Details</a></li>
+            <li><a class="dropdown-item" href="{% url 'book_appointment' %}">Book Appointment</a></li>
+            <li><a class="dropdown-item" href="{% url 'agenda' %}">Agenda</a></li>
+            <li><a class="dropdown-item" href="{% url 'contact' %}">Contact</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'service' %}">Service </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pricing' %}">Pricing </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Blog
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
+            <li><a class="dropdown-item" href="{% url 'blog-details' %}">Blog Details</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Agenda 
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'agenda' %}">Deze Maand</a></li>
+            <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'March' %}">Maart</a></li>
+            <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'April' %}">April</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'book_appointment' %}">Book Appointment </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'stockhome' %}">Stockhome </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add_stock' %}">Add Stock </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Blog
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'all_blogposts' %}">All Blogposts</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_blogpost' %}">Add Blogpost</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Rechterkant van de Navbar -->
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown dropstart">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ user.username }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </li>              
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- ***** Navbar End ***** -->
