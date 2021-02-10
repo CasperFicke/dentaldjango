@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block title %}
+  Delete blogpost
+{% endblock %}
+
+{% block content %}
+  
+  {% if user.is_authenticated %}
+    <h3>Delete: {{ blogpost.title }}</h3>
+    <br/>
+    <div class="form-group">
+      <form method="POST">
+        <!-- django commando om input token te maken -->
+        {% csrf_token %}
+        <button class="btn btn-secondary">Delete</button>
+        <a class="btn btn-secondary" href="{% url 'all_blogposts' %}">Cancel</a>
+      </form>
+      <br/>
+    </div>
+  {% else %}
+    <h3> Opvragen van deze pagina is niet toegestaan. Hiervoor moet u ingelogd zijn!</h3>
+  {% endif %}
+
+{% endblock %}
+
+

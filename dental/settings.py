@@ -128,6 +128,9 @@ STATICFILES_DIRS = [
   BASE_DIR / 'static',
 ]
 
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
 # Setting for deploying to heroku
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 # local
-from .forms  import SignUpForm, EditProfileForm, StockForm
+from .forms  import SignUpForm, EditUsersettingsForm, StockForm
 from .models import Stock, Course
 
 # python packages
@@ -68,18 +68,18 @@ def register_user(request):
   context = {'form': form}
   return render(request, 'authenticate/register.html', context)
 
-# edit profile view
-def edit_profile(request):
+# edit usersettings view
+def edit_usersettings(request):
   if request.method == "POST":
-    form = EditProfileForm(request.POST, instance=request.user)
+    form = EditUsersettingsForm(request.POST, instance=request.user)
     if form.is_valid():
       form.save()
-      messages.success(request, ("You successfully updated your profile"))
+      messages.success(request, ("You successfully updated your usersettings"))
       return redirect('index')
   else:
-    form = EditProfileForm(instance=request.user)
+    form = EditUsersettingsForm(instance=request.user)
   context = {'form': form}
-  return render(request, 'authenticate/edit_profile.html', context)
+  return render(request, 'authenticate/edit_usersettings.html', context)
 
 # change password view
 def change_password(request):
@@ -171,8 +171,8 @@ def agenda(request, year=datetime.now().year, month=datetime.now().strftime('%B'
     "current_time": current_time
     })
 
-# Stockhome view
-def stockhome(request):
+# Stockvalues view
+def stockvalues(request):
   import requests
   import json
   iexcloud_apikey = os.getenv('IEXCLOUD_APIKEY')
@@ -201,18 +201,18 @@ def stockhome(request):
     if add_stock_form.is_valid():
       add_stock_form.save()
       messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " is aan de tabel toegevoegd"))
-      return redirect('stockhome')
+      return redirect('stockvalues')
     else:
       messages.success(request, ("Error in form ..."))
 
     # render page after POST
-    return render(request, 'stocks/stockhome.html', {'api_result': api_result, 'output': output})
+    return render(request, 'stocks/stockvalues.html', {'api_result': api_result, 'output': output})
   else:
     # render page after GET
-    return render(request, 'stocks/stockhome.html', {'output': output})
+    return render(request, 'stocks/stockvalues.html', {'output': output})
 
-# add stock view
-def add_stock(request):
+# all stocks view
+def all_stocks(request):
   import json
   import requests
 
@@ -226,11 +226,11 @@ def add_stock(request):
     if add_stock_form.is_valid():
       add_stock_form.save()
       messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " is aan de tabel toegevoegd"))
-      return redirect('add_stock')
+      return redirect('all_stocks')
     else:
       messages.success(request, ("Error in formulier ..."))
 
-  return render(request, 'stocks/add_stock.html', {'tickers': tickers})
+  return render(request, 'stocks/all_stocks.html', {'tickers': tickers})
 
 # edit stock view
 def edit_stock(request, stock_id):
@@ -240,7 +240,7 @@ def edit_stock(request, stock_id):
     if form.is_valid():
       form.save()
       messages.success(request, ('Item updated'))
-      return redirect('add_stock')
+      return redirect('all_stocks')
   else:
     item = Stock.objects.get(pk=stock_id)
     return render(request, 'stocks/edit_stock.html', {'item': item})
@@ -252,7 +252,7 @@ def delete_stock(request, stock_id):
   ticker_description = item.ticker_description
   item.delete()
   messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " has been deleted!"))
-  return redirect(add_stock)
+  return redirect(all_stocks)
 
 # Course view
 class CourseView(viewsets.ModelViewSet):

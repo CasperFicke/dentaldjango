@@ -63,11 +63,14 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'contact' %}">Contact </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'stockhome' %}">Stockhome </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'add_stock' %}">Add Stock </a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Stocks
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'all_stocks' %}">All Stocks</a></li>
+            <li><a class="dropdown-item" href="{% url 'stockvalues' %}">Stock values</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,9 +78,32 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'all_blogposts' %}">All Blogposts</a></li>
-            <li><a class="dropdown-item" href="{% url 'add_blogpost' %}">Add Blogpost</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_categories' %}">All Categories</a></li>
+            {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'add_blogpost' %}">Add Blogpost</a></li>
+              <li><a class="dropdown-item" href="{% url 'add_category' %}">Add Category</a></li>
+            {% endif %}
           </ul>
         </li>
+        <!-- Category menu code -->
+        {% if cat_menu %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for item in cat_menu %}
+                <a class="dropdown-item" href="{% url 'category' item|slugify %}">{{ item }}</a>
+              {% endfor %}
+              <div class="dropdown-divider"></div>
+              {% if user.is_authenticated %}
+                <a class="dropdown-item" href="{% url 'add_category' %}">Add Category</a>
+              {% endif %}
+            </div>
+          </li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'all_categories' %}">Categories</a></li>
+        {% endif %}
       </ul>
 
       <!-- Rechterkant van de Navbar -->
@@ -88,7 +114,7 @@
             {{ user.username }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'edit_usersettings' %}">Edit Settings</a></li>
             <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
           </ul>

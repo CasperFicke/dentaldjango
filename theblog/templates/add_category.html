@@ -1,12 +1,12 @@
 {% extends 'base.html' %} 
 {% block title %}
-  Update blogpost
+  Create a new Blog-category
 {% endblock %}
 
 {% block content %}
 
 {% if user.is_authenticated %}
-  <h2>Update Post.. </h2>
+  <h2>Add Category.. </h2>
   <div class="form-group">
     <form method="POST" enctype="multipart/form-data">
       <!-- django commando om input token te maken -->
@@ -14,11 +14,9 @@
       <!-- django shortcut om compleet formulier te maken --> 
       {{ form.media }}
       {{ form.as_p }}
-      <button class="btn btn-secondary">Update</button>
-      <a href="{% url 'all_blogposts' %}" class="btn btn-secondary">Cancel</a>
+      <button class="btn btn-secondary">Submit</button>
     </form>
   </div>
-  <br/>
   <!-- javascript om in de frontend te zorgen dat een nieuwe blog de ingelogde user als author krijgt -->
   <script>
     var name = "{{ user.id }}";

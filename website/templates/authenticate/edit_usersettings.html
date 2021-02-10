@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% load static %}
-{% block title %}Dento - Dentist &amp; Medical - Register{% endblock %}
+{% block title %}Dento - Dentist &amp; Medical - Edit Settings{% endblock %}
 {% block content %}
 
   <!-- ***** Breadcrumb Area Start ***** -->
@@ -8,7 +8,7 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-12">
-          <h2 class="title">Edit Profile</h2>
+          <h2 class="title">Edit User Settings</h2>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Edit profile</li>
+              <li class="breadcrumb-item active" aria-current="page">Edit Settings</li>
             </ol>
           </nav>
         </div>
@@ -29,9 +29,9 @@
   </div>
   <!-- ***** Breadcrumb Area End ***** -->
 
-  <!-- ***** Edit profile Area Start ***** -->
+  <!-- ***** Edit Usersettings Area Start ***** -->
   <div class="col-md-9 offset-md-3">
-    <form method="POST" action="{% url 'edit_profile' %}">
+    <form method="POST" action="{% url 'edit_usersettings' %}">
       {% csrf_token %}
       {% if form.errors %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -48,6 +48,6 @@
       <input type="submit" class="btn btn-secondary" value="Submit Changes">
     </form>
   </div>
-  <!-- ***** Edit profile Area End ***** -->
+  <!-- ***** Edit Usersettings End ***** -->
 
 {% endblock %}

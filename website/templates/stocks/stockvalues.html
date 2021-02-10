@@ -8,7 +8,7 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-12">
-          <h2 class="title">Aandelen</h2>
+          <h2 class="title">Aandeelkoersen</h2>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Aandelen</li>
+              <li class="breadcrumb-item active" aria-current="page">Aandeelkoersen</li>
             </ol>
           </nav>
         </div>
@@ -32,12 +32,14 @@
   <!-- ****** Aandeelinformatie Area Start ******* -->
   <div class="container">
     <div class="row align-items-center">
-      <form action="{% url 'stockhome' %}" class="form-inline my-2 my-lg-0" method="POST">
-        {% csrf_token%}
-        <input class="form-control me-2" type="search" placeholder="aandeel-ticker" aria-label="Search" name="ticker_name">
-        <input class="form-control me-2" placeholder="aandeel-toelichting" name="ticker_description">
-        <button class="btn btn-outline-secondary" type="submit">Add</button>
-      </form>
+      {% if user.is_authenticated %}
+        <form action="{% url 'stockvalues' %}" class="form-inline my-2 my-lg-0" method="POST">
+          {% csrf_token%}
+          <input class="form-control me-2" type="search" placeholder="aandeel-ticker" aria-label="Search" name="ticker_name">
+          <input class="form-control me-2" placeholder="aandeel-toelichting" name="ticker_description">
+          <button class="btn btn-outline-secondary" type="submit">Add</button>
+        </form>
+      {% endif %}
       <br/>
       {% if api_result %}
         {% if api_result == "Error..." %}
