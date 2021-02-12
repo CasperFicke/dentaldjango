@@ -1,7 +1,7 @@
 ### VIEWS.PY THEBLOG APP ###
 
 # django
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
@@ -23,12 +23,12 @@ class BlogsView(ListView):
   model         = BlogPost
   template_name = 'all_blogposts.html'
   ordering      = ['-post_date']
-  # ordering     = ['-id']
+  # ordering    = ['-id']
 
   # function to make data usable in html
   def get_context_data(self, *args, **kwargs):
     cat_menu = Category.objects.all()
-    context = super(BlogsView, self).get_context_data(*args, **kwargs)
+    context  = super(BlogsView, self).get_context_data(*args, **kwargs)
     context["cat_menu"] = cat_menu
     return context
 
@@ -37,6 +37,36 @@ class BlogPostView(DetailView):
   model         = BlogPost
   template_name = 'show_blogpost.html'
 
+  # function to make data usable in html
+  def get_context_data(self, *args, **kwargs):
+    cat_menu = Category.objects.all()
+    context  = super(BlogPostView, self).get_context_data(*args, **kwargs)
+    # total likes
+    stuff = get_object_or_404(BlogPost, id=self.kwargs['pk'])
+    total_likes = stuff.total_likes()
+    
+    # liked status
+    liked=False
+    if stuff.likes.filter(id=self.request.user.id).exists():
+      liked = True
+    
+    context["cat_menu"] = cat_menu
+    context["total_likes"] = total_likes
+    context["liked"] = liked
+    return context
+
+# like blogpost
+def LikeView(request, pk):
+  blogpost = get_object_or_404(BlogPost, id=request.POST.get('blogpost_id'))
+  liked = False
+  if blogpost.likes.filter(id=request.user.id).exists():
+    blogpost.likes.remove(request.user)
+    liked = False
+  else:
+    blogpost.likes.add(request.user)
+    liked = True
+  return HttpResponseRedirect(reverse('show_blogpost', args=[str(pk)]))
+    
 # add blogpost
 class AddBlogPostView(CreateView):
   model         = BlogPost

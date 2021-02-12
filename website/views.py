@@ -1,17 +1,20 @@
 ### VIEWS.PY WEBSITE APP ###
 
-# django
-from django.shortcuts import render, redirect
+# Django
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views import generic
+from django.views.generic import DetailView, CreateView
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages
+from django.urls import reverse_lazy
 from django.core.mail import send_mail
 
-# local
-from .forms  import SignUpForm, EditUsersettingsForm, StockForm
-from .models import Stock, Course
+# Local
+from .forms  import SignUpForm, EditUsersettingsForm, ProfileForm, StockForm
+from .models import UserProfile, Stock, Course
 
-# python packages
+# Python packages
 import os
 
 import calendar
@@ -94,6 +97,41 @@ def change_password(request):
     form = PasswordChangeForm(user=request.user)
   context = {'form': form}
   return render(request, 'authenticate/change_password.html', context)
+
+### USERPROFILE ###
+
+# Create profile
+class CreateProfileView(CreateView):
+  model         = UserProfile
+  form_class    = ProfileForm
+  template_name = 'authenticate/create_profile.html'
+  # fields        = '__all__'
+  # success_url   = reverse_lazy('home')
+  # function to get userid of loggendin user and use it to save profilepage
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
+# Show profile
+class ShowProfileView(DetailView):
+  model         = UserProfile
+  template_name = 'authenticate/show_profile.html'
+  # function to make data usable in html
+  def get_context_data(self, *args, **kwargs):
+    # users = UserProfile.objects.all()
+    context = super(ShowProfileView, self).get_context_data(*args, **kwargs)
+    page_user = get_object_or_404(UserProfile, id=self.kwargs['pk'])
+    context["page_user"] = page_user
+    return context
+
+# Edit profile
+class EditProfileView(generic.UpdateView):
+  model         = UserProfile
+  template_name = 'authenticate/edit_profile.html'
+  fields        = ['bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url']
+  success_url   = reverse_lazy ('index')
+
+### DENTO ###
 
 # contact view
 def contact(request):

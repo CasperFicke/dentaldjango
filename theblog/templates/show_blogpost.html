@@ -7,13 +7,34 @@
 
 {% block content %}
   <h2>BlogPost name: {{ blogpost.title }}</h2>
-  by: {{ blogpost.author.first_name }} {{ blogpost.author.last_name }} -  {{ blogpost.post_date }} <br/>
+  by: {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}
+   - {{ blogpost.post_date }}
+  <br/>
+  <hr>
+  {% if blogpost.header_image %} 
+    <img src="{{ blogpost.header_image.url }}">
+  {% endif %}
+  <br/>
   {{ blogpost.body|safe }}
   <br/><br/>
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and blogpost.author.id == user.id %}
     <a href="{% url 'update_blogpost' blogpost.pk %}" class="btn btn-secondary">Edit</a>
     <a href="{% url 'delete_blogpost' blogpost.pk %}" class="btn btn-secondary">Delete</a>
   {% endif %}
   <a href="{% url 'all_blogposts' %}" class="btn btn-secondary">Back</a>
+  <hr>
+  <form action="{% url 'like_post' blogpost.pk %}" method="POST">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+      {% if liked %}
+        <button type="Submit", name="blogpost_id", value="{{ blogpost.id }}", class="btn btn-danger">UnLike</button>
+      {% else %}
+        <button type="Submit", name="blogpost_id", value="{{ blogpost.id }}", class="btn btn-primary">Like</button>
+      {% endif %}
+    {% else %}
+      <a href="{% url 'login' %}">Login </a>to like
+    {% endif %}
+    - {{ total_likes }} Likes
+  </form>
   <br/><br/>
 {% endblock %}

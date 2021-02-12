@@ -116,6 +116,12 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'edit_usersettings' %}">Edit Settings</a></li>
             <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
+            {% if user.userprofile.id %}
+                  <a class="dropdown-item" href="{% url 'edit_profile' user.userprofile.id %}">Edit Profile</a>
+                  <a class="dropdown-item" href="{% url 'show_profile' user.userprofile.id %}">Show Profile</a>
+                {% else %}
+                  <a class="dropdown-item" href="{% url 'create_profile' %}">Create Profile</a>
+                {% endif %}
             <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
           </ul>
         </li>              

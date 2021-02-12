@@ -5,7 +5,7 @@
 
 {% block content %}
   
-  {% if user.is_authenticated %}
+{% if user.is_authenticated and blogpost.author.id == user.id %}
     <h3>Delete: {{ blogpost.title }}</h3>
     <br/>
     <div class="form-group">
@@ -18,7 +18,7 @@
       <br/>
     </div>
   {% else %}
-    <h3> Opvragen van deze pagina is niet toegestaan. Hiervoor moet u ingelogd zijn!</h3>
+    <h3> Opvragen van deze pagina is niet toegestaan.</h3>
   {% endif %}
 
 {% endblock %}

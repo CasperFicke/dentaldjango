@@ -14,12 +14,13 @@
          -  <a href="{% url 'category' blogpost.category|slugify %}">{{ blogpost.category }}</a>
          - {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}
          - {{ blogpost.post_date }}
-        {% if user.is_authenticated %}
+         {% if user.is_authenticated and blogpost.author.id == user.id %}
           - <a href="{% url 'update_blogpost' blogpost.pk %}">(Edit)</a>
           - <a href="{% url 'delete_blogpost' blogpost.pk %}">(Delete)</a>
         {% endif %}
         <br/>
-        {{ blogpost.body|slice:"200" }}
+        {{ blogpost.snippet }}
+        <!--{{ blogpost.body|slice:":200"|safe }}...-->
         <br/><br/>
       </li>
     {% endfor %}
