@@ -1,30 +1,16 @@
 {% extends 'base.html' %} 
 {% load static %}
-{% block title %}Dento - Dentist &amp; Medical - Aandelen{% endblock %}
+{% block title %} Aandeel waarden {% endblock %}
 {% block content %}
 
   <!-- ***** Breadcrumb Area Start ***** -->
-  <div class="breadcumb-area bg-img bg-gradient-overlay">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
-        <div class="col-12">
-          <h2 class="title">Aandeelkoersen</h2>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="breadcumb--con">
+  <h2 >Aandeelkoersen</h2>
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Aandeelkoersen</li>
-            </ol>
-          </nav>
-        </div>
+          <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Aandeelkoersen</li>
       </div>
+      <hr/>
     </div>
   </div>
   <!-- ***** Breadcrumb Area End ***** -->

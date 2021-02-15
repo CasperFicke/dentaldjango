@@ -1,11 +1,11 @@
 ### ADMIN.PY WBSITE APP ###
 
-# django
+# Django
 from django.contrib import admin
 
-# Register your models here.
+# Local
 from .models import UserProfile, Stock, Course
 
-
+# Register your models here.
 myModels = [UserProfile, Stock, Course]  # iterable list
 admin.site.register(myModels)

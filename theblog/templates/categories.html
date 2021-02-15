@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-
-{% block title %}
-  Categories
-{% endblock %}
-
+{% load static %}
+{% block title %} Categories {% endblock %}
 {% block content %}
   
   {% if category_posts %}
@@ -24,7 +21,9 @@
       {% endfor %}
     </ul>
   {% else %}
-    <h2>Deze pagina bestaat niet</h2>
+    <br/>
+    <h3>Er zijn nog geen blogs in de categorie "{{ cats }}"</h3>
+    <br/>
   {% endif %}
 
 {% endblock %}

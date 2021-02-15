@@ -8,7 +8,7 @@ from rest_framework import routers
 #from . import views
 
 # import views
-from .views import BlogsView, BlogPostView, AddBlogPostView,UpdateBlogPostView, DeleteBlogPostView, BlogView, CategoryListView, AddCategoryView, CategoryView, LikeView
+from .views import BlogsView, BlogPostView, AddBlogPostView,UpdateBlogPostView, DeleteBlogPostView, BlogView, CategoryListView, AddCategoryView, CategoryView, LikeView, AddCommentView
 
 # tbv rest framework
 router = routers.DefaultRouter()
@@ -37,6 +37,9 @@ urlpatterns = [
   
   # like a post
   path('like/<int:pk>', LikeView, name='like_post'),
+  
+  # add comment
+  path('blogpost/<int:pk>/comment/', AddCommentView.as_view(), name='add_comment'),
     
   # restframework
   #path('api/', include(router.urls))

@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% load static %}
-{% block title %}Dento - Dentist &amp; Medical - Edit Settings{% endblock %}
+{% block title %} Edit User Settings{% endblock %}
 {% block content %}
 
   <!-- ***** Breadcrumb Area Start ***** -->
@@ -30,7 +30,7 @@
   <!-- ***** Breadcrumb Area End ***** -->
 
   <!-- ***** Edit Usersettings Area Start ***** -->
-  <div class="col-md-6">
+  <div class="col-md-6 offset-md-3" >
     <form method="POST" action="{% url 'edit_usersettings' %}">
       {% csrf_token %}
       {% if form.errors %}

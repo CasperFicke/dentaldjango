@@ -1,11 +1,9 @@
-{% extends 'base.html' %} 
-{% block title %}
-  Delete blogpost
-{% endblock %}
-
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Delete blogpost {% endblock %}
 {% block content %}
   
-{% if user.is_authenticated and blogpost.author.id == user.id %}
+  {% if user.is_authenticated and blogpost.author.id == user.id %}
     <h3>Delete: {{ blogpost.title }}</h3>
     <br/>
     <div class="form-group">

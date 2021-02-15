@@ -1,36 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Dento - Dentist &amp; Medical - Agenda{% endblock %}
+{% block title %} Agenda {% endblock %}
 {% block content %}
 
-  <!-- Agenda Area Start -->
-  <section class="book-an-oppointment-area section-padding-100 bg-img bg-gradient-overlay jarallax clearfix">
-    <div class="container">
-      <div class="row">
-        <!-- Section Heading -->
-        <div class="col-12">
-          <div class="section-heading text-center white">
-            <h2>Agenda</h2>
-            <div class="line"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+   <!-- ***** Breadcrumb Area Start ***** -->
+   <h2>Agenda</h2>
+   <div class="container">
+     <div class="row">
+       <div class="col-12">
+         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Agenda
+       </div>
+       <hr/>
+     </div>
+   </div>
+   <!-- ***** Breadcrumb Area End ***** -->
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <div class="mx-auto" style="width: 200px;">
-            {{ cal|safe }}
-            </br>
-            <div class="section-heading text-center">
-              <div class="line"></div>
-              {{ current_time }}
-            </div>
-        </div>
+      <div class="col-md-6 offset-md-3">
+        {{ cal|safe }}
+        </br>
+          {{ current_time }}
       </div>
     </div>
   </div>
-  <!-- Agenda Area End -->
 
-  {% endblock %}
+{% endblock %}

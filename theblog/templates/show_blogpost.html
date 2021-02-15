@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}
-  {{ blogpost.title_tag }}
-{% endblock %}
-
+{% block title %} {{ blogpost.title_tag }} {% endblock %}
 {% block content %}
-  <h2>BlogPost name: {{ blogpost.title }}</h2>
+   <!-- ***** Breasdcrum Area Start ***** -->
+   <div class="container">
+     <div class="row">
+       <div class="col-12">
+         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / <a href="{% url 'all_blogposts' %}">blogposts</a> / {{ blogpost.id }}
+       </div>
+       <hr/>
+     </div>
+   </div>
+   <!-- ***** Breadcrum Area End ***** -->
+   
+  <h2>BlogPost: {{ blogpost.title }}</h2>
   by: {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}
    - {{ blogpost.post_date }}
   <br/>
   <hr>
   {% if blogpost.header_image %} 
-    <img src="{{ blogpost.header_image.url }}">
+    <img src="{{ blogpost.header_image.url }}" width="500" height="300">
   {% endif %}
   <br/>
   {{ blogpost.body|safe }}
@@ -36,5 +43,63 @@
     {% endif %}
     - {{ total_likes }} Likes
   </form>
-  <br/><br/>
+  <br/>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        {% if post.author.userprofile.profile_pic %}
+          <img src="{{ blogpost.author.userprofile.profile_pic.url }}" class="card-img">
+          {% else %}
+            <img src="{% static 'website/img/standard.jpg' %}" class="card-img">
+        {% endif %}
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ blogpost.author.first_name }} 
+            {{ blogpost.author.last_name }}
+          </h5>
+          <p class="card-text">
+            <small class="text-muted">
+              <a href="{% url 'show_profile' blogpost.author.userprofile.id %}">Profile Page</a>
+              {% if blogpost.author.userprofile.website_url %}
+              | <a href="{{ blogpost.author.userprofile.website_url }}">Website</a>
+              {% endif %}
+              {% if blogpost.author.userprofile.twitter_url %}
+              | <a href="{{ blogpost.author.userprofile.twitter_url }}">Twitter</a>
+              {% endif %}
+              {% if blogpost.author.userprofile.facebook_url %}
+              | <a href="{{ blogpost.author.userprofile.facebook_url }}">Facebook</a>
+              {% endif %}
+            </small>
+          </p>
+          <p class="card-text"> {{ blogpost.author.userprofile.bio}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+  </div>    
+  <h2>Comments:</h2>
+  {% if not blogpost.comments.all %}
+    No comments yet.. 
+    {% if user.is_authenticated %}
+      <a href="{% url 'add_comment' blogpost.pk %}" class="btn btn-secondary">Add Comment</a>
+    {% endif %}
+    <br/><br/>
+  {% else %}
+    {% for comment in blogpost.comments.all %}
+      <strong>
+        {{ comment.name }} - 
+        {{ comment.date_added }}
+      </strong>
+      <br/>
+      {{ comment.body }}
+      <br/>
+    {% endfor %}
+    {% if user.is_authenticated %}
+      <a href="{% url 'add_comment' blogpost.pk %}" class="btn btn-secondary">Add Comment</a>
+    {% endif %}
+    <br/><br/>
+  {% endif %}
+
 {% endblock %}

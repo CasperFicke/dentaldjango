@@ -7,8 +7,8 @@ from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 
 # local
-from .models import BlogPost, Category
-from .forms import PostForm, UpdateForm
+from .models import BlogPost, Category, Comment
+from .forms import PostForm, UpdateForm, CommentForm
 
 # tbv rest API's
 from rest_framework import viewsets
@@ -73,7 +73,10 @@ class AddBlogPostView(CreateView):
   form_class    = PostForm
   template_name = 'add_blogpost.html'
   # fields      = '__all__'
-  # fields      = ('title', 'body')
+  # function to get userid of loggendin user and use it to assign the new blogpost to this user
+  def form_valid(self, form):
+    form.instance.author = self.request.user
+    return super().form_valid(form)
 
 # update blogpost
 class UpdateBlogPostView(UpdateView):
@@ -119,3 +122,20 @@ def CategoryView(request, cats):
     {'cats':cats.title().replace('-', ' '),
     'category_posts': category_posts}
   )
+
+############
+# COMMENTS #
+############
+
+# add comment
+class AddCommentView(CreateView):
+  model         = Comment
+  form_class    = CommentForm
+  template_name = 'add_comment.html'
+  # redirect to blogpost
+  def get_success_url(self):
+     return reverse_lazy('show_blogpost', kwargs={'pk': self.kwargs['pk']})
+  # function to get userid of loggendin user and use it to save profilepage
+  def form_valid(self, form):
+    form.instance.blogpost_id = self.kwargs['pk']
+    return super().form_valid(form)

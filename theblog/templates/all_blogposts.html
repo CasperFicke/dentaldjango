@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
-
-{% block title %}
-  All blogs
-{% endblock %}
-
+{% load static %}
+{% block title %} All blogs {% endblock %}
 {% block content %}
-  <h2>Blogposts</h2>
 
-  <ul>
+   <!-- ***** Breadcrumb Area Start ***** -->
+   <div class="container">
+     <div class="row">
+       <div class="col-12">
+         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Blogposts
+       </div>
+       <hr/>
+     </div>
+   </div>
+   <!-- ***** Breadcrumb Area End ***** -->
+   
+   <h2>Blogposts</h2>
+   <ul>
     {% for blogpost in object_list %}
       <li>
         <a href="{% url 'show_blogpost' blogpost.pk %}">{{ blogpost.title }}</a>

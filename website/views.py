@@ -11,7 +11,7 @@ from django.urls import reverse_lazy
 from django.core.mail import send_mail
 
 # Local
-from .forms  import SignUpForm, EditUsersettingsForm, ProfileForm, StockForm
+from .forms  import SignUpForm, EditUsersettingsForm, ProfileForm, EditProfileForm, StockForm
 from .models import UserProfile, Stock, Course
 
 # Python packages
@@ -127,8 +127,9 @@ class ShowProfileView(DetailView):
 # Edit profile
 class EditProfileView(generic.UpdateView):
   model         = UserProfile
+  form_class    = EditProfileForm
   template_name = 'authenticate/edit_profile.html'
-  fields        = ['bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url']
+  # fields        = ['bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url']
   success_url   = reverse_lazy ('index')
 
 ### DENTO ###

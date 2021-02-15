@@ -92,6 +92,23 @@ class ProfileForm(forms.ModelForm):
               'twitter_url',
               'facebook_url')
     widgets = {
+      'bio'          : forms.Textarea(attrs={'class': 'form-control'}),
+      # 'profile_pic'  : forms.TextInput(attrs={'class': 'form-control'}),
+      'website_url'  : forms.TextInput(attrs={'class': 'form-control'}),
+      'twitter_url'  : forms.TextInput(attrs={'class': 'form-control'}),
+      'facebook_url' : forms.TextInput(attrs={'class': 'form-control'}),
+    }
+
+# Edit Profile form
+class EditProfileForm(forms.ModelForm):
+  class Meta:
+    model = UserProfile
+    fields = ('bio',
+              'profile_pic',
+              'website_url',
+              'twitter_url',
+              'facebook_url')
+    widgets = {
       'bio'          : forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'insert bio here'}),
       # 'profile_pic'  : forms.TextInput(attrs={'class': 'form-control'}),
       'website_url'  : forms.TextInput(attrs={'class': 'form-control'}),

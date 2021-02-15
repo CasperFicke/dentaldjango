@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% load static %}
-{% block title %}Dento - Dentist &amp; Medical - Register{% endblock %}
+{% block title %} Register {% endblock %}
 {% block content %}
 
   <!-- ***** Breadcrumb Area Start ***** -->
@@ -30,7 +30,7 @@
   <!-- ***** Breadcrumb Area End ***** -->
 
   <!-- ***** Register Area Start ***** -->
-  <div class="col-md-9 offset-md-3">
+  <div class="col-md-6 offset-md-3">
     <form method="POST" action="{% url 'register' %}">
       {% csrf_token %}
       {% if form.errors %}

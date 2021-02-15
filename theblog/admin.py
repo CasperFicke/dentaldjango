@@ -1,9 +1,14 @@
 # django
 from django.contrib import admin
 
-# lokaal
-from .models import BlogPost, Category
+### ADMIN.PY WBSITE APP ###
+
+# Django
+from django.contrib import admin
+
+# Local
+from .models import BlogPost, Category, Comment
 
 # Register your models here.
-admin.site.register(BlogPost)
-admin.site.register(Category)
+myModels = [BlogPost, Category, Comment]  # iterable list
+admin.site.register(myModels)
