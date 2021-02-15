@@ -47,10 +47,6 @@ urlpatterns = [
   path('stocks/<stock_id>/delete/', views.delete_stock, name="delete_stock"),
   path('stocks/values/', views.stockvalues, name="stockvalues"),
 
-  # AGENDA
-  path('agenda/', views.agenda, name="agenda"),
-  path('agenda/<int:year>/<str:month>/', views.agenda , name="agenda"), # path converters
-
   # RESTFRAMEWORK
   path('api/', include(router.urls))
 ]

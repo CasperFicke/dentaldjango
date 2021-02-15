@@ -1,6 +1,3 @@
-# django
-from django.contrib import admin
-
 ### ADMIN.PY WBSITE APP ###
 
 # Django

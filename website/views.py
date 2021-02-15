@@ -17,10 +17,6 @@ from .models import UserProfile, Stock, Course
 # Python packages
 import os
 
-import calendar
-from calendar import HTMLCalendar, monthrange
-from datetime import datetime
-
 # tbv rest API's
 from rest_framework import viewsets
 from .serializers import CourseSerializer, StockSerializer
@@ -183,32 +179,7 @@ def service(request):
 def book_appointment(request):
   return render(request, 'book_appointment.html', {})
 
-# agenda view (/agenda/ is huidige maand, /agenda/jaar/maand/ is ingevoerde maand)
-def agenda(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
-  # get current time
-  now=datetime.now()
-  current_time = now.strftime('%H:%M:%S')
-
-  # set firstletter of month to uppercase
-  month = month.capitalize()
-  # convert month from name to number
-  month_number = list(calendar.month_name).index(month)
-  # make sure it's an integer
-  month_number = int(month_number)
-
-  # Create kalender
-  cal = HTMLCalendar().formatmonth(
-    year,
-    month_number
-  )
-  return render(request,
-    'events/agenda.html', {
-    "year":year,
-    "month": month,
-    "month_number": month_number,
-    "cal": cal,
-    "current_time": current_time
-    })
+### STOCKS ###
 
 # Stockvalues view
 def stockvalues(request):

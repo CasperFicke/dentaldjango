@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'website',
     'theblog',
+    'events',
     'ckeditor',
     'rest_framework',
 ]
