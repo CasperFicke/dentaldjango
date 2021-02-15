@@ -2,16 +2,17 @@
 {% load static %}
 {% block title %} {{ blogpost.title_tag }} {% endblock %}
 {% block content %}
-   <!-- ***** Breasdcrum Area Start ***** -->
-   <div class="container">
-     <div class="row">
-       <div class="col-12">
-         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / <a href="{% url 'all_blogposts' %}">blogposts</a> / {{ blogpost.id }}
-       </div>
-       <hr/>
-     </div>
-   </div>
-   <!-- ***** Breadcrum Area End ***** -->
+
+  <!-- ***** Breasdcrum Area Start ***** -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / <a href="{% url 'all_blogposts' %}">blogposts</a> / {{ blogpost.id }}
+      </div>
+      <hr/>
+    </div>
+  </div>
+  <!-- ***** Breadcrum Area End ***** -->
    
   <h2>BlogPost: {{ blogpost.title }}</h2>
   by: {{ blogpost.author.first_name }} {{ blogpost.author.last_name }}

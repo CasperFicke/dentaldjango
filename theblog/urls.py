@@ -11,7 +11,7 @@ from rest_framework import routers
 from .views import BlogsView, BlogPostView, AddBlogPostView,UpdateBlogPostView, DeleteBlogPostView, BlogView, CategoryListView, AddCategoryView, CategoryView, LikeView, AddCommentView
 
 # tbv rest framework
-router = routers.DefaultRouter()
+#router = routers.DefaultRouter()
 #router.register('blogposts', BlogView.as_view({'get': 'list'}))
 
 urlpatterns = [

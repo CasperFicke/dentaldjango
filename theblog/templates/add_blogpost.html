@@ -2,16 +2,17 @@
 {% load static %}
 {% block title %} Create a new blogpost {% endblock %}
 {% block content %}
-   <!-- ***** Breadcrumb Area Start ***** -->
-   <h2>Add Blogpost</h2>
-   <div class="container">
-     <div class="row">
-       <div class="col-12">
-         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Add Blogpost
-       </div>
-       <hr/>
-     </div>
-   </div>
+
+  <!-- ***** Breadcrumb Area Start ***** -->
+  <h2>Add Blogpost</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Add Blogpost
+      </div>
+      <hr/>
+    </div>
+  </div>
    <!-- ***** Breadcrumb Area End ***** -->
   {% if user.is_authenticated %}
     <div class="form-group">
