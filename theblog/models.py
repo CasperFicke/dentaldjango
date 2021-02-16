@@ -13,8 +13,6 @@ from datetime import datetime, date
 class BlogPost(models.Model):
   title        = models.CharField(max_length=200)
   header_image = models.ImageField(null=True, blank=True, upload_to="images/blogheader/")
-  # na uitbreding van model met extra veld als er al records zijn moet default worden meegegeven. kan later weer weg.
-  # title_tag  = models.CharField(max_length=255, default="default tekst")
   title_tag    = models.CharField(max_length=200, default='title')
   snippet      = models.CharField(max_length=255)
   author       = models.ForeignKey(User, on_delete=models.CASCADE)
