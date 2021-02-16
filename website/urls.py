@@ -3,7 +3,7 @@
 # Django
 from django.urls import path, include
 
-from rest_framework import routers
+#from rest_framework import routers
 
 # local
 from . import views
@@ -11,9 +11,9 @@ from . import views
 from .views import ShowProfileView, EditProfileView, CreateProfileView
 
 # tbv restframework
-router = routers.DefaultRouter()
-router.register('courses', views.CourseView)
-router.register('stocks', views.StockView)
+#router = routers.DefaultRouter()
+#router.register('courses', views.CourseView)
+#router.register('stocks', views.StockView)
 
 urlpatterns = [
   # HOME
@@ -48,5 +48,5 @@ urlpatterns = [
   path('stocks/values/', views.stockvalues, name="stockvalues"),
 
   # RESTFRAMEWORK
-  path('api/', include(router.urls))
+  #path('api/', include(router.urls))
 ]

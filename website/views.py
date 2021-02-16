@@ -18,7 +18,7 @@ from .models import UserProfile, Stock, Course
 import os
 
 # tbv rest API's
-from rest_framework import viewsets
+# from rest_framework import viewsets
 from .serializers import CourseSerializer, StockSerializer
 
 # Index view
@@ -264,7 +264,8 @@ def delete_stock(request, stock_id):
   messages.success(request, ("Aandeel " + ticker_name + " ; " + ticker_description + " has been deleted!"))
   return redirect(all_stocks)
 
-# Course view
+'''
+ # Course view
 class CourseView(viewsets.ModelViewSet):
   queryset         = Course.objects.all()
   serializer_class = CourseSerializer
@@ -273,3 +274,4 @@ class CourseView(viewsets.ModelViewSet):
 class StockView(viewsets.ModelViewSet):
   queryset         = Stock.objects.all()
   serializer_class = StockSerializer
+'''
