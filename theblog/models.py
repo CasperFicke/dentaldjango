@@ -7,7 +7,7 @@ from django.urls import reverse
 
 # python
 from datetime import datetime, date
-from ckeditor.fields import RichTextField
+# from ckeditor.fields import RichTextField
 
 # Blogpost model
 class BlogPost(models.Model):
@@ -18,7 +18,8 @@ class BlogPost(models.Model):
   title_tag    = models.CharField(max_length=200, default='title')
   snippet      = models.CharField(max_length=255)
   author       = models.ForeignKey(User, on_delete=models.CASCADE)
-  body         = RichTextField(blank=True, null=True)
+  body         = models.TextField(blank=True, null=True)
+  # body       = RichTextField(blank=True, null=True)
   post_date    = models.DateField(auto_now_add=True)
   category     = models.CharField(max_length=255, default='leeg')
   likes        = models.ManyToManyField(User, related_name='blog_posts')
