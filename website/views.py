@@ -19,7 +19,7 @@ import os
 
 # tbv rest API's
 # from rest_framework import viewsets
-from .serializers import CourseSerializer, StockSerializer
+# from .serializers import CourseSerializer, StockSerializer
 
 # Index view
 def index(request):
