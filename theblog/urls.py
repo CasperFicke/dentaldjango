@@ -8,7 +8,7 @@ from django.urls import path, include
 #from . import views
 
 # import views
-from .views import BlogsView, BlogPostView, AddBlogPostView,UpdateBlogPostView, DeleteBlogPostView, BlogView, CategoryListView, AddCategoryView, CategoryView, LikeView, AddCommentView
+from .views import BlogsView, BlogPostView, AddBlogPostView,UpdateBlogPostView, DeleteBlogPostView, CategoryListView, AddCategoryView, CategoryView, LikeView, AddCommentView
 
 # tbv rest framework
 #router = routers.DefaultRouter()

@@ -11,8 +11,8 @@ from .models import BlogPost, Category, Comment
 from .forms import PostForm, UpdateForm, CommentForm
 
 # tbv rest API's
-from rest_framework import viewsets
-from .serializers import BlogPostSerializer
+#from rest_framework import viewsets
+#from .serializers import BlogPostSerializer
 
 ##############
 # CATEGORIES #
@@ -92,9 +92,9 @@ class DeleteBlogPostView(DeleteView):
   success_url   = reverse_lazy('all_blogposts')
 
 # Blog view
-class BlogView(viewsets.ModelViewSet):
-  queryset         = BlogPost.objects.all()
-  serializer_class = BlogPostSerializer
+#class BlogView(viewsets.ModelViewSet):
+#  queryset         = BlogPost.objects.all()
+#  serializer_class = BlogPostSerializer
 
 ##############
 # CATEGORIES #
