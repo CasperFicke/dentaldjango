@@ -49,9 +49,10 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Agenda 
+            Events 
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'all_events' %}">All Events</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' %}">Deze Maand</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'March' %}">Maart</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'April' %}">April</a></li>
@@ -104,6 +105,9 @@
         {% else %}
         <li class="nav-item"><a class="nav-link" href="{% url 'all_categories' %}">Categories</a></li>
         {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'default_map' %}">Default map </a>
+        </li>
       </ul>
 
       <!-- Rechterkant van de Navbar -->

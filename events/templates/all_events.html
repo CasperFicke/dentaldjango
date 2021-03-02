@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Events {% endblock %}
+{% block content %}
+
+   <!-- ***** Breadcrumb Area Start ***** -->
+   
+   <div class="container">
+     <div class="row">
+       <div class="col-12">
+         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Events
+       </div>
+       <hr/>
+     </div>
+     <h2>Events</h2>
+   </div>
+   <!-- ***** Breadcrumb Area End ***** -->
+  <div class="container">
+    {% for event in event_list %}
+      <div class="card">
+        <div class="card-header">
+          <strong>{{ event.name }}</strong>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Datum: {{ event.event_date }}</h5>
+          <p class="card-text">
+            <ul>
+              <li>Venue: {{ event.venue.name }}</li>
+              <li>Venue website: {{ event.venue.website }}</li>
+              <li>Manager: {{ event.manager }}</li>
+              <li>Beschrijving: {{ event.description }}</li>
+              <strong>Bezoekers</strong>
+              {% for attendee in event.attendees.all %}
+                <li>{{ attendee.first_name }}</li>
+              {% endfor %}
+              <br/>
+            </ul>
+          </p>
+          <a href="#" class="btn btn-primary">Signup</a>
+        </div>
+      </div>
+      <br/>
+    {% endfor %}
+  </div>
+
+{% endblock %}

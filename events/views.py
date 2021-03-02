@@ -4,12 +4,17 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 
-
+# local
+from .models import Event
 import calendar
 from calendar import HTMLCalendar, monthrange
 from datetime import datetime
 
-# Create your views here.
+
+# All Events view
+def all_events(request):
+  event_list = Event.objects.all()
+  return  render(request, 'all_events.html', {'event_list': event_list})
 
 # agenda view (/agenda/ is huidige maand, /agenda/jaar/maand/ is ingevoerde maand)
 def agenda(request, year=datetime.now().year, month=datetime.now().strftime('%B')):

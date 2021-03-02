@@ -26,6 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# set PROJ_DIR = 'C:\OSGeo4W\'
 
 # Application definition
 
@@ -36,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'django.contrib.gis',
     'users',
     'website',
     'theblog',
     'events',
+    'maps',
     #'ckeditor',
     #'rest_framework',
 ]
