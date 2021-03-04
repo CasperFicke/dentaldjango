@@ -1,4 +1,9 @@
+### FORMS.PY THEBLOG APP ###
+
+# Django
 from django import forms
+
+# Local
 from .models import BlogPost, Category, Comment
 
 # maak list met categorien tbv dropdown

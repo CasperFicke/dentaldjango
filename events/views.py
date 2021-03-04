@@ -1,15 +1,31 @@
 ### VIEWS.PY EVENTS APP ###
+# function based
 
 # Django
 from django.shortcuts import render, redirect
 from django.views import generic
+from django.http import HttpResponseRedirect
 
 # local
-from .models import Event
+from .models import Venue, Event
+from .forms import VenueForm
 import calendar
 from calendar import HTMLCalendar, monthrange
 from datetime import datetime
 
+# add venue
+def add_venue(request):
+  submitted = False
+  if request.method == "POST":
+    form = VenueForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return HttpResponseRedirect('/venues/add?submitted=True')
+  else:
+    form = VenueForm
+    if 'submitted' in request.GET:
+      submitted = True
+  return render(request, 'add_venue.html', {'form':form, 'submitted':submitted})
 
 # All Events view
 def all_events(request):

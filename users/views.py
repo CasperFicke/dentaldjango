@@ -1,4 +1,5 @@
 ### VIEWS.PY USERS APP ###
+# function - en classbased views
 
 # Django
 from django.shortcuts import render, redirect, get_object_or_404

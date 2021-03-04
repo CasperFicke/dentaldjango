@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Add Venue {% endblock %}
+{% block content %}
+
+   <!-- ***** Breadcrumb Area Start ***** -->
+   
+   <div class="container">
+     <div class="row">
+       <div class="col-12">
+         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / add Venue
+       </div>
+       <hr/>
+     </div>
+     <h2>Add Venue</h2>
+   </div>
+   <!-- ***** Breadcrumb Area End ***** -->
+  <div class="container">
+    {% if submitted %}
+     succesfully submitted
+    {% else %}
+      <form action="" method=POST>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" class="btn btn-secondary">
+      </form>
+    {% endif %}
+    <br/>
+  </div>
+
+{% endblock %}

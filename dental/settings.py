@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'theblog',
     'events',
     'maps',
+    'energie',
     #'ckeditor',
     #'rest_framework',
 ]

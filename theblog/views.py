@@ -1,4 +1,5 @@
 ### VIEWS.PY THEBLOG APP ###
+# function - en classbased views
 
 # django
 from django.shortcuts import render, get_object_or_404

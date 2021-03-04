@@ -13,6 +13,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'index' %}">Home </a>
         </li>
+        <!-- Dental menu code -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Pages 
@@ -29,47 +30,26 @@
             <li><a class="dropdown-item" href="{% url 'contact' %}">Contact</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'about' %}">About </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'service' %}">Service </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'pricing' %}">Pricing </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Blog
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'blog' %}">Blog</a></li>
-            <li><a class="dropdown-item" href="{% url 'blog-details' %}">Blog Details</a></li>
-          </ul>
-        </li>
+        <!-- Events menu code -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Events 
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'all_events' %}">All Events</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_events' %}">Alle Events</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_venue' %}">Add Venue</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' %}">Deze Maand</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'March' %}">Maart</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'April' %}">April</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'book_appointment' %}">Book Appointment </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'contact' %}">Contact </a>
-        </li>
+        <!-- Stock menu code -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Stocks
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'all_stocks' %}">All Stocks</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_stocks' %}">Alle Stocks</a></li>
             <li><a class="dropdown-item" href="{% url 'stockvalues' %}">Stock values</a></li>
           </ul>
         </li>
@@ -78,8 +58,8 @@
             Blog
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'all_blogposts' %}">All Blogposts</a></li>
-            <li><a class="dropdown-item" href="{% url 'all_categories' %}">All Categories</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_blogposts' %}">Alle Blogposts</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_categories' %}">Alle Categorien</a></li>
             {% if user.is_authenticated %}
               <li><a class="dropdown-item" href="{% url 'add_blogpost' %}">Add Blogpost</a></li>
               <li><a class="dropdown-item" href="{% url 'add_category' %}">Add Category</a></li>
@@ -90,7 +70,7 @@
         {% if cat_menu %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Categories
+              Categorien
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               {% for item in cat_menu %}
@@ -107,6 +87,19 @@
         {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'default_map' %}">Default map </a>
+        </li>
+        <!-- Energie menu code -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Energie 
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'all_meterstanden' %}">Alle Meterstanden</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_venue' %}">Gas</a></li>
+            <li><a class="dropdown-item" href="{% url 'agenda' %}">Water</a></li>
+            <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'March' %}">Zonnepanelen</a></li>
+            <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'April' %}">Electriciteit</a></li>
+          </ul>
         </li>
       </ul>
 

@@ -7,6 +7,8 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
+  # VENUES
+   path('venues/add/', views.add_venue, name="add_venue"),
   # EVENTS
   path('events/', views.all_events, name="all_events"),
   # AGENDA

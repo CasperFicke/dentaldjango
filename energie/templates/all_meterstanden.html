@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Meterstanden {% endblock %}
+{% block content %}
+
+   <!-- ***** Breadcrumb Area Start ***** -->
+   
+   <div class="container">
+     <div class="row">
+       <div class="col-12">
+         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Meterstanden
+       </div>
+       <hr/>
+     </div>
+     <h2>Meterstanden</h2>
+   </div>
+   <!-- ***** Breadcrumb Area End ***** -->
+  <div class="container">
+    <br/>
+    <div class="row align-items-center">  
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Meter</th>
+            <th scope="col">Medium</th>
+            <th scope="col">Datum</th>
+            <th scope="col">Stand</th>
+            <th scope="col">Opnemer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if meterstanden_list %}   
+            {% for meterstand in meterstanden_list %}
+              <tr>
+                <td>{{ meterstand.meter }}</td>
+                <td>{{ meterstand.meter.medium }}</td>
+                <td>{{ meterstand.meterstand_date }}</td>
+                <td>{{ meterstand.meterstand_waarde }}</td>
+                <td>{{ meterstand.opnemer }}</td>
+              </tr>
+            {% endfor %} 
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}
