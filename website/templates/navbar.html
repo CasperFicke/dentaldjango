@@ -95,10 +95,10 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'all_meterstanden' %}">Alle Meterstanden</a></li>
-            <li><a class="dropdown-item" href="{% url 'add_venue' %}">Gas</a></li>
-            <li><a class="dropdown-item" href="{% url 'agenda' %}">Water</a></li>
-            <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'March' %}">Zonnepanelen</a></li>
-            <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'April' %}">Electriciteit</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_meterstanden' 'gas' %}">Gas</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_meterstanden' 'water' %}">Water</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_meterstanden' 'gas' %}">Zonnepanelen</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_meterstanden' 'electriciteit' %}">Electriciteit</a></li>
           </ul>
         </li>
       </ul>

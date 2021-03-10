@@ -8,11 +8,11 @@
    <div class="container">
      <div class="row">
        <div class="col-12">
-         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Meterstanden
+         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / <a href="{% url 'all_meterstanden' %}"> Meterstanden</a> / {{ medium }}
        </div>
        <hr/>
      </div>
-     <h2>Meterstanden</h2>
+     <h2>{{ medium }} meterstanden </h2>
    </div>
    <!-- ***** Breadcrumb Area End ***** -->
   <div class="container">
@@ -29,19 +29,37 @@
           </tr>
         </thead>
         <tbody>
-          {% if meterstanden_list %}   
-            {% for meterstand in meterstanden_list %}
+          {% if page_obj %}   
+            {% for meterstand in page_obj %}
               <tr>
                 <td>{{ meterstand.meter }}</td>
                 <td>{{ meterstand.meter.medium }}</td>
                 <td>{{ meterstand.meterstand_date }}</td>
-                <td>{{ meterstand.meterstand_waarde }}</td>
+                <td>{{ meterstand.meterstand_waarde }} {{ meterstand.meter.eenheid }}</td>
                 <td>{{ meterstand.opnemer }}</td>
               </tr>
             {% endfor %} 
           {% endif %}
         </tbody>
       </table>
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first  </a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous  </a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">  next  </a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+      </div>
+      <img src="data:image/png;base64,{{ data }}" alt="" height="100" ,width="250">
     </div>
   </div>
 

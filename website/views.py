@@ -7,6 +7,7 @@ from django.views import generic
 from django.views.generic import DetailView, CreateView
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 from django.core.mail import send_mail
 
 # Local
@@ -119,6 +120,7 @@ def all_stocks(request):
   import requests
 
   tickers = Stock.objects.all()
+  paginator = Paginator(tickers, 5) # Show 5 stocks per page.
 
   if request.method == "POST":
     ticker_name        = request.POST['ticker_name']
@@ -132,7 +134,10 @@ def all_stocks(request):
     else:
       messages.success(request, ("Error in formulier ..."))
 
-  return render(request, 'stocks/all_stocks.html', {'tickers': tickers})
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  return render(request, 'stocks/all_stocks.html', {'page_obj': page_obj})
+  # return render(request, 'stocks/all_stocks.html', {'tickers': tickers})
 
 # edit stock view
 def edit_stock(request, stock_id):

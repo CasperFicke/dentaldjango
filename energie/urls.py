@@ -9,4 +9,5 @@ from . import views
 urlpatterns = [
   # METERSTANDEN
   path('meterstanden/', views.all_meterstanden, name="all_meterstanden"),
+  path('meterstanden/<str:medium>/', views.all_meterstanden , name="all_meterstanden"), # path converter
 ]
