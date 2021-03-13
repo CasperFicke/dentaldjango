@@ -36,8 +36,10 @@
             Events 
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'all_venues' %}">Alle Venues</a></li>
             <li><a class="dropdown-item" href="{% url 'all_events' %}">Alle Events</a></li>
             <li><a class="dropdown-item" href="{% url 'add_venue' %}">Add Venue</a></li>
+            <li><a class="dropdown-item" href="{% url 'kalender' %}">Kalender</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' %}">Deze Maand</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'March' %}">Maart</a></li>
             <li><a class="dropdown-item" href="{% url 'agenda' '2021' 'April' %}">April</a></li>

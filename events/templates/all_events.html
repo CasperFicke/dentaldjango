@@ -1,3 +1,5 @@
+<!-- events/templates/all_events.html -->
+
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} Events {% endblock %}
@@ -22,7 +24,7 @@
           <strong>{{ event.name }}</strong>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Datum: {{ event.event_date }}</h5>
+          <h5 class="card-title">Datum: {{ event.event_start }}</h5>
           <p class="card-text">
             <ul>
               <li>Venue: {{ event.venue.name }}</li>

@@ -1,0 +1,50 @@
+<!-- events/templates/all_venues.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Venues {% endblock %}
+{% block content %}
+
+  <!-- ***** Breadcrumb Area Start ***** -->
+  <h2>Venues</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a> / Venues
+      </div>
+      <hr/>
+    </div>
+  </div>
+  <!-- ***** Breadcrumb Area End ***** -->
+  <div class="container">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Website</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if venue_list %}
+         {% for venue in venue_list %}   
+            <tr>
+              <td>{{ venue.id }}</td>
+              <th scope="row">{{ venue.name }}</th>
+              <td><a href="{% url 'show_venue' venue.id %}">{{ venue.website }}</td>
+              {% if user.is_authenticated %}
+                <td><a href="{% url 'show_venue' venue.id %}" class="btn btn-secondary" >Edit</a></td>
+                <td><a href="{% url 'show_venue' venue.id %}" class="btn btn-secondary" >Delete</a></td>
+              {% else %}
+                <td>Not allowed</td>
+                <td>Not allowed</td>
+              {% endif %}
+            </tr>
+          {% endfor %}  
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

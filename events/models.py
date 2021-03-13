@@ -1,4 +1,4 @@
-### MODELS.PY EVENTS APP ###
+### events/models.py ###
 
 # Django
 from django.db import models
@@ -33,7 +33,8 @@ class Visitor(models.Model):
 class Event(models.Model):
   name        = models.CharField('Event Name', max_length=255)
   description = models.TextField('Event Description', blank=True)
-  event_date  = models.DateTimeField('Event Date')
+  event_start = models.DateTimeField('Event Start', blank=True)
+  event_end   = models.DateTimeField('Event End', blank=True)
   venue       = models.ForeignKey(Venue, blank=True, null=True, on_delete=models.CASCADE)
   # manager   = models.CharField(max_length=100)
   manager     = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)

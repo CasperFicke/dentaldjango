@@ -1,4 +1,4 @@
-### FORMS.PY EVENTS APP ###
+### evenets/forms.py ###
 
 #Django
 from django import forms

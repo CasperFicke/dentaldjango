@@ -33,7 +33,7 @@ def login_user(request):
       messages.success(request, ('Error logging in. Please try again..'))
       return redirect('login')
   else:
-    return render(request, 'authenticate/login.html', {})
+    return render(request, 'login.html', {})
 
 # Logout view
 def logout_user(request):
@@ -58,7 +58,7 @@ def register_user(request):
   else:
     form = SignUpForm()
   context = {'form': form}
-  return render(request, 'authenticate/register.html', context)
+  return render(request, 'register.html', context)
 
 # edit usersettings view
 def edit_usersettings(request):
@@ -71,7 +71,7 @@ def edit_usersettings(request):
   else:
     form = EditUsersettingsForm(instance=request.user)
   context = {'form': form}
-  return render(request, 'authenticate/edit_usersettings.html', context)
+  return render(request, 'edit_usersettings.html', context)
 
 # change password view
 def change_password(request):
@@ -85,7 +85,7 @@ def change_password(request):
   else:
     form = PasswordChangeForm(user=request.user)
   context = {'form': form}
-  return render(request, 'authenticate/change_password.html', context)
+  return render(request, 'change_password.html', context)
 
 ### USERPROFILE ###
 
@@ -93,7 +93,7 @@ def change_password(request):
 class CreateProfileView(CreateView):
   model         = UserProfile
   form_class    = ProfileForm
-  template_name = 'authenticate/create_profile.html'
+  template_name = 'create_profile.html'
   # fields        = '__all__'
   # success_url   = reverse_lazy('home')
   # function to get userid of loggendin user and use it to save profilepage
@@ -104,7 +104,7 @@ class CreateProfileView(CreateView):
 # Show profile
 class ShowProfileView(DetailView):
   model         = UserProfile
-  template_name = 'authenticate/show_profile.html'
+  template_name = 'show_profile.html'
   # function to make data usable in html
   def get_context_data(self, *args, **kwargs):
     # users = UserProfile.objects.all()
@@ -117,6 +117,6 @@ class ShowProfileView(DetailView):
 class EditProfileView(generic.UpdateView):
   model         = UserProfile
   form_class    = EditProfileForm
-  template_name = 'authenticate/edit_profile.html'
+  template_name = 'edit_profile.html'
   # fields        = ['bio', 'profile_pic', 'website_url', 'twitter_url', 'facebook_url']
   success_url   = reverse_lazy ('index')

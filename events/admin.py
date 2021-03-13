@@ -1,4 +1,4 @@
-### ADMIN.PY EVENTS APP ###
+### events/admin.py ###
 
 # Django
 from django.contrib import admin
@@ -21,8 +21,9 @@ class VenueAdmin(admin.ModelAdmin):
 # Register Event with customized admin area
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-  fields        = (('name', 'venue'), 'event_date', 'description', 'manager', 'attendees')
-  list_display  = ('name', 'event_date', 'venue')
-  list_filter  = ('event_date', 'venue')
-  ordering      = ('event_date',)
+  fields        = (('name', 'venue'), 'event_start', 'event_end', 'description', 'manager', 'attendees')
+  list_display  = ('name', 'event_start', 'event_end', 'venue')
+  list_filter  = ('event_start', 'venue')
+  ordering      = ('event_start',)
   search_fields = ('name', 'venue')
+  
